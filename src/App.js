@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "react-perfect-scrollbar/dist/css/styles.css";
 
-function App() {
+import GlobalStyles from "./components/GlobalStyles";
+import React from "react";
+import { ThemeProvider } from "@material-ui/core";
+import routes from "./routes";
+import theme from "./theme";
+import { useRoutes } from "react-router-dom";
+
+const App = () => {
+  const routing = useRoutes(routes);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      {routing}
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
