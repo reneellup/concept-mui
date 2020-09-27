@@ -1,9 +1,24 @@
-import { AppBar, Avatar, Paper, Tab, Tabs, Toolbar } from "@material-ui/core";
+import {
+  AppBar,
+  Avatar,
+  Button,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Paper,
+  Tab,
+  Tabs,
+  Toolbar,
+} from "@material-ui/core";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
+import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import IconButton from "@material-ui/core/IconButton";
 import { ReactComponent as MenuIcon } from "../../icons/menuicon.svg";
 import React from "react";
+import SettingsIcon from "@material-ui/icons/Settings";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -78,6 +93,7 @@ const useStyles = makeStyles((theme) => ({
   },
   user: {
     paddingLeft: "10px",
+    textTransform: "none",
   },
   avatar: {
     color: "#ffffff",
@@ -119,10 +135,17 @@ const StyledTabs = withStyles(stylesTabs)(Tabs);
 const TopBar = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <div className={classes.grow}>
       <AppBar position="static" color="transparent">
@@ -158,27 +181,62 @@ const TopBar = () => {
               <StyledTab label="Devices" />
             </StyledTabs>
           </Paper>
-          <div className={classes.account}>
-            <div>
-              {/* Avatar */}
-              <Avatar className={classes.avatar}>TW</Avatar>
+          <Button
+            aria-controls="customized-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            <div className={classes.account}>
+              <div>
+                {/* Avatar */}
+                <Avatar className={classes.avatar}>TW</Avatar>
+              </div>
+              <div className={classes.user}>
+                {/* User name */}
+                <Typography variant="h6" color="textPrimary" align="justify">
+                  Tyler Wain
+                </Typography>
+                {/* Role - Location */}
+                <Typography
+                  variant="caption"
+                  color="textPrimary"
+                  display="block"
+                  align="justify"
+                >
+                  UI Designer - Austin, TX
+                </Typography>
+              </div>
             </div>
-            <div className={classes.user}>
-              {/* User name */}
-              <Typography variant="h6" color="textPrimary">
-                Tyler Wain
-              </Typography>
-              {/* Role - Location */}
-              <Typography
-                variant="caption"
-                color="textPrimary"
-                display="block"
-                gutterBottom
-              >
-                UI Designer - Austin, TX
-              </Typography>
-            </div>
-          </div>
+          </Button>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            getContentAnchorEl={null}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            transformOrigin={{ vertical: "top", horizontal: "center" }}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>
+              <ListItemIcon>
+                <AccountCircleOutlinedIcon fontSize="large" color="primary" />
+              </ListItemIcon>
+              <ListItemText primary="My Account" />
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <ListItemIcon>
+                <SettingsIcon fontSize="large" color="primary" />
+              </ListItemIcon>
+              <ListItemText primary="Settings" />
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <ListItemIcon>
+                <ExitToAppIcon fontSize="large" color="primary" />
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
+            </MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
     </div>
