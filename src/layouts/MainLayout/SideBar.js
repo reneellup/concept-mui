@@ -1,4 +1,4 @@
-import { Paper, Tab, Tabs } from "@material-ui/core";
+import { Hidden, Paper, Tab, Tabs } from "@material-ui/core";
 
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import DeviceHubIcon from "@material-ui/icons/DeviceHub";
@@ -54,26 +54,28 @@ const SideBar = () => {
   };
   return (
     <div className={classes.grow}>
-      <Paper>
-        <StyledTabs
-          orientation="vertical"
-          value={value}
-          onChange={handleChange}
-          indicatorColor="secondary"
-          textColor="secondary"
-          centered
-        >
-          <StyledTab icon={<DashboardIcon />} aria-label="dashboard" />
-          <StyledTab icon={<LocalActivityIcon />} aria-label="activities" />
-          <StyledTab icon={<LoyaltyIcon />} aria-label="badges" />
-          <StyledTab icon={<TodayIcon />} aria-label="calendar" />
-          <StyledTab
-            icon={<SignalCellularConnectedNoInternet3BarIcon />}
-            aria-label="connections"
-          />
-          <StyledTab icon={<DeviceHubIcon />} aria-label="devices" />
-        </StyledTabs>
-      </Paper>
+      <Hidden lgUp>
+        <Paper>
+          <StyledTabs
+            orientation="vertical"
+            value={value}
+            onChange={handleChange}
+            indicatorColor="secondary"
+            textColor="secondary"
+            centered
+          >
+            <StyledTab icon={<DashboardIcon />} aria-label="dashboard" />
+            <StyledTab icon={<LocalActivityIcon />} aria-label="activities" />
+            <StyledTab icon={<LoyaltyIcon />} aria-label="badges" />
+            <StyledTab icon={<TodayIcon />} aria-label="calendar" />
+            <StyledTab
+              icon={<SignalCellularConnectedNoInternet3BarIcon />}
+              aria-label="connections"
+            />
+            <StyledTab icon={<DeviceHubIcon />} aria-label="devices" />
+          </StyledTabs>
+        </Paper>
+      </Hidden>
     </div>
   );
 };

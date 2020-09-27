@@ -2,6 +2,7 @@ import {
   AppBar,
   Avatar,
   Button,
+  Hidden,
   ListItemIcon,
   ListItemText,
   Menu,
@@ -116,22 +117,25 @@ const TopBar = () => {
           >
             CONCEPT
           </Typography>
-          <Paper className={classes.grow}>
-            <StyledTabs
-              value={value}
-              onChange={handleChange}
-              indicatorColor="secondary"
-              textColor="secondary"
-              centered
-            >
-              <StyledTab label="Dashboard" />
-              <StyledTab label="Activities" />
-              <StyledTab label="Badges" />
-              <StyledTab label="Calendar" />
-              <StyledTab label="Connections" />
-              <StyledTab label="Devices" />
-            </StyledTabs>
-          </Paper>
+          <Paper className={classes.grow}></Paper>
+          <Hidden mdDown>
+            <Paper className={classes.grow}>
+              <StyledTabs
+                value={value}
+                onChange={handleChange}
+                indicatorColor="secondary"
+                textColor="secondary"
+                centered
+              >
+                <StyledTab label="Dashboard" />
+                <StyledTab label="Activities" />
+                <StyledTab label="Badges" />
+                <StyledTab label="Calendar" />
+                <StyledTab label="Connections" />
+                <StyledTab label="Devices" />
+              </StyledTabs>
+            </Paper>
+          </Hidden>
           <Button
             aria-controls="customized-menu"
             aria-haspopup="true"
