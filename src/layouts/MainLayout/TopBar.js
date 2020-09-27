@@ -1,18 +1,9 @@
-import { AppBar, Paper, Tab, Tabs, Toolbar } from "@material-ui/core";
+import { AppBar, Avatar, Paper, Tab, Tabs, Toolbar } from "@material-ui/core";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import Badge from "@material-ui/core/Badge";
-import { Height } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
-import InputBase from "@material-ui/core/InputBase";
-import MailIcon from "@material-ui/icons/Mail";
-import Menu from "@material-ui/core/Menu";
 import { ReactComponent as MenuIcon } from "../../icons/menuicon.svg";
-import MoreIcon from "@material-ui/icons/MoreVert";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import React from "react";
-import SearchIcon from "@material-ui/icons/Search";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -82,6 +73,16 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  account: {
+    display: "flex",
+  },
+  user: {
+    paddingLeft: "10px",
+  },
+  avatar: {
+    color: "#ffffff",
+    backgroundColor: "#fcb415",
+  },
 }));
 
 const stylesTab = (theme) => ({
@@ -118,14 +119,8 @@ const StyledTabs = withStyles(stylesTabs)(Tabs);
 const TopBar = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const [setAnchorEl] = React.useState(null);
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const menuId = "primary-search-account-menu";
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
   };
 
   return (
@@ -163,27 +158,26 @@ const TopBar = () => {
               <StyledTab label="Devices" />
             </StyledTabs>
           </Paper>
-          <div>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+          <div className={classes.account}>
+            <div>
+              {/* Avatar */}
+              <Avatar className={classes.avatar}>TW</Avatar>
+            </div>
+            <div className={classes.user}>
+              {/* User name */}
+              <Typography variant="h6" color="textPrimary">
+                Tyler Wain
+              </Typography>
+              {/* Role - Location */}
+              <Typography
+                variant="caption"
+                color="textPrimary"
+                display="block"
+                gutterBottom
+              >
+                UI Designer - Austin, TX
+              </Typography>
+            </div>
           </div>
         </Toolbar>
       </AppBar>
